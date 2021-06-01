@@ -20,12 +20,6 @@ setup(
                       'transformers>=3.0.0'
                       'nltk'
                       ],
-    entry_points={
-        'console_scripts': [
-            "bert-score=bert_score_cli.score:main",
-            "bert-score-show=bert_score_cli.visualize:main",
-        ]
-    },
     include_package_data=True,
     python_requires='>=3.6',
     classifiers=[
