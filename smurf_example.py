@@ -1,8 +1,7 @@
 import json
 from smurf.eval import preprocess,smurf_eval_captions
 from smurf.system_analysis import smurf_system_analysis
-#ref_file = 'data/ref_flickr.json'
-#cand_file = 'data/cand_flickr.json'
+
 ref_file = 'data/karpathy_ref.json'
 cand_file = 'data/karpathy_cand.json'
 result_file = 'results/smurf_scores.json'
@@ -21,7 +20,6 @@ refs = [ref_dict[cap['image_id']] for cap in cand_list]
 #perform caption-level analysis of example caption set
 meta_scorer = smurf_eval_captions(refs, cands, fuse=True)
 scores = meta_scorer.evaluate()
-
 with open(result_file, 'w') as outfile:
     json.dump(scores, outfile)
 
@@ -31,5 +29,7 @@ standardization_file = 'smurf/standardize_estimates.txt'
 plot_file = 'results/system_plot.png'
 analysis = smurf_system_analysis(in_file='results/smurf_scores.json')
 analysis.load_standardized_scores(estimates_file=standardization_file)
-analysis.compute_grammar_penalities()
 analysis.generate_plot(plot_colors,out_file=plot_file)
+model_penalties = analysis.compute_grammar_penalities()
+for num,total_penalty in enumerate(model_penalties):
+	print('Model %i Penalty: %f'%(num+1,total_penalty))
