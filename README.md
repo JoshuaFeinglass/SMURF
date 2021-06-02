@@ -22,11 +22,11 @@ SMURF is an automatic caption evaluation metric that combines a novel semantic e
 Returns a dictionary with scores for semantic similarity between reference captions and candidate captions (SPARCS), style/diction quality of candidate text (SPURTS), grammar outlier penalty of candidate text (MIMA), and the fusion of these scores (SMURF).
 
 #### System-Level Analysis
-After reading in and standardizing caption-level scores, generates a plot that can be used to give an overall evaluation of captioner performances along with relevant system-level scores (intersection with reference captioner and total grammar outlier penalties) for each captioner.
+After reading in and standardizing caption-level scores, generates a plot that can be used to give an overall evaluation of captioner performances along with relevant system-level scores (intersection with reference captioner and total grammar outlier penalties) for each captioner. An example of such a plot is shown below:
 ![](./results/system_plot.png "system_analysis")
-The number of captioners you are comparing should be specified by when instantiating a smurf_system_analysis object. In order to generate the plot correctly, the captions of each candidate captioner (C1, C2, ..., CN) should be organized in the following format: 
-[C1 output image 1, C2 output image 1, ... CN output image 1, C1 output image 2, C2 output image 2, CN output image 2].
-The C1 captioner should be the ground truth.
+
+The number of captioners you are comparing should be specified by when instantiating a smurf_system_analysis object. In order to generate the plot correctly, the captions fed into the caption-level scoring for each candidate captioner (C1, C2,...) should be organized in the following format with the C1 captioner as the ground truth: 
+[C1 image 1 output, C2 image 1 output,...C1 image 2 output, C2 image 2 output].
 
 ### Author:
 Joshua Feinglass (https://scholar.google.com/citations?user=V2h3z7oAAAAJ&hl=en)
