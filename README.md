@@ -26,6 +26,7 @@ After reading in and standardizing caption-level scores, generates a plot that c
 ![](./results/system_plot.png "system_analysis")
 
 The number of captioners you are comparing should be specified by when instantiating a smurf_system_analysis object. In order to generate the plot correctly, the captions fed into the caption-level scoring for each candidate captioner (C1, C2,...) should be organized in the following format with the C1 captioner as the ground truth: 
+
 [C1 image 1 output, C2 image 1 output,...C1 image 2 output, C2 image 2 output].
 
 ### Author:
