@@ -12,9 +12,7 @@ cand_list = json.loads(open(cand_file, 'r').read())
 cands = [preprocess(cap['caption']) for cap in cand_list]
 ref_dict = {cap['image_id']:[] for cap in ref_list}
 for i,cap in enumerate(ref_list):
-    if len(ref_dict[cap['image_id']])<5:
-        ref_dict[cap['image_id']].append(preprocess(cap['caption']))
-
+    ref_dict[cap['image_id']].append(preprocess(cap['caption']))
 refs = [ref_dict[cap['image_id']] for cap in cand_list]
 
 #perform caption-level analysis of example caption set

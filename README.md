@@ -4,7 +4,7 @@
 Automatic caption evaluation metric described in the paper [SMURF: SeMantic and linguistic UndeRstanding Fusion for Caption Evaluation via Typicality Analysis](FILL SOON) (ACL 2021).
 
 ### Overview
-SMURF is an automatic caption evaluation metric that combines a novel semantic evaluation algorithm (SPARCS) and novel fluency evaluation algorithms (SPURTS and MIMA) for both caption-level and system-level analysis. These evaluations were developed to be generalizable as a result demonstrate a high correlation with human judgment across many relevant datasets. See paper for more details.
+SMURF is an automatic caption evaluation metric that combines a novel semantic evaluation algorithm (SPARCS) and novel fluency evaluation algorithms (SPURTS and MIMA) for both caption-level and system-level analysis. These evaluations were developed to be generalizable and as a result demonstrate a high correlation with human judgment across many relevant datasets. See paper for more details.
 
 ### Requirements
 - torch>=1.0.0
