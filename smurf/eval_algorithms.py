@@ -10,12 +10,17 @@ STOP_WORDS = stopwords.words('english')
 
 def att_MI_torch(attention, out_shape):
     attention_MI = torch.zeros((len(attention),attention[0].shape[0],attention[0].shape[1]))
-    full_att = torch.zeros((len(attention),attention[0].shape[0],attention[0].shape[1],out_shape[0],out_shape[0]))
+    full_att = torch.zeros((len(attention),attention[0].shape[0],
+                            attention[0].shape[1],out_shape[0],out_shape[0]))
+
     for iter_layer, layer in enumerate(attention):
         full_att[iter_layer,:,:,:,:] = layer
     for ex_num in range(0,len(out_shape)):
-        attention_MI[:, ex_num, :] = mutual_info_torch(full_att[:,ex_num, :, 0:out_shape[ex_num], 0:out_shape[ex_num]])
-    return list(torch.quantile(torch.max(attention_MI, dim=-1)[0], q=0.5,dim=0).cpu().detach().numpy().astype(np.float))
+        attention_MI[:, ex_num, :] = mutual_info_torch(full_att[:,ex_num, :,
+                                                       0:out_shape[ex_num], 0:out_shape[ex_num]])
+
+    return list(torch.quantile(torch.max(attention_MI, dim=-1)[0],
+                               q=0.5,dim=0).cpu().detach().numpy().astype(np.float))
 
 
 def mutual_info_torch(inp):
@@ -44,7 +49,6 @@ def disc_joint_entropy_torch(inp, axis=None):
         sum_shape[axis] = 1
         sums = torch.sum(inp, dim=axis)
         sums = sums.view(tuple(sum_shape.astype(int)))
-
         tile = np.ones_like(inp.shape)
         tile[axis] = inp.shape[axis]
         pdfs = torch.div(inp,sums.repeat(tuple(tile.astype(int))))
@@ -63,38 +67,7 @@ class compute_semantic():
         self.stemmer = nltk.stem.PorterStemmer()
     def method(self):
         return "SPARCS"
-    ##########################################################################################
 
-    # def create_val_dict(self,all_sent):
-    #     sing_sents = []
-    #     full_set = set()
-    #     for sent in all_sent:
-    #         toks = self.tokenizer.tokenize(sent)
-    #         toks = [tok for tok in toks if '##' not in toks]
-    #         non_stop = [tok for tok in toks if tok not in list(string.punctuation) + list(STOP_WORDS)]
-    #         non_stop_stemmed = set(self.stemmer.stem(tok) for tok in non_stop)
-    #         sing_sents.append(non_stop_stemmed)
-    #         full_set = full_set.union(non_stop_stemmed)
-    #     stem_dict = dict()
-    #     for concept in full_set:
-    #         relevance = sum(concept in sent for sent in sing_sents)
-    #         stem_dict[concept] = relevance/len(sing_sents)
-    #     mean_detail = np.mean([np.sum([stem_dict[concept] for concept in sent]) for sent in sing_sents])
-    #     return stem_dict,mean_detail,full_set
-    #
-    # def sent_seq_metric(self,sent_in,val_dict):
-    #     tok_in = self.tokenizer.tokenize(sent_in)  # , add_special_tokens=True)
-    #     tok_in = [tok for tok in tok_in if '##' not in tok]  # exp 4 commented exp 5 uncommented
-    #     non_stop = [tok for tok in tok_in if tok not in list(string.punctuation) + list(STOP_WORDS)]
-    #     non_stop_stemmed = set(self.stemmer.stem(tok) for tok in non_stop)
-    #     cand = {}
-    #     for y in non_stop_stemmed:
-    #         if y in val_dict:
-    #             cand[y] = val_dict[y]
-    #         else:
-    #             cand[y] = 1
-    #     return cand
-    ########################################################################################
     def coalesce_to_concepts(self,sent_in):
         toks = nltk.word_tokenize(sent_in)
         return [self.stemmer.stem(tok) for tok in toks if tok not in list(STOP_WORDS) and
@@ -185,6 +158,7 @@ class compute_quality():
             self.start_tok = 101
             self.end_tok = 102
             self.unk_tok = 100
+
     def method(self):
         if self.distinctness == 1:
             return "SPURTS"

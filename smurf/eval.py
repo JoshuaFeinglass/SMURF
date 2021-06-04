@@ -15,10 +15,8 @@ class smurf_eval_captions:
         self.fuse = fuse
 
     def evaluate(self):
-        # =================================================
-        # Set up scorers
-        # =================================================
 
+        # Set up scorers
         print('setting up scorers...')
         scorers = [
             (compute_semantic(), "SPARCS"),
@@ -26,9 +24,7 @@ class smurf_eval_captions:
             (compute_quality(use_roberta=1, distinctness=True), "SPURTS")
         ]
 
-        # =================================================
         # Compute scores
-        # =================================================
         metric_scores = {}
         for scorer, method in scorers:
             metric_scores[method] = []
@@ -38,6 +34,7 @@ class smurf_eval_captions:
             print("Mean %s score: %0.3f. Computed in %0.2f seconds." %
                     (method, float(np.mean(metric_scores[method])),time.time()-t))
 
+        # Compute SMURF (fusion of estimates)
         if self.fuse:
             estimates = pd.read_csv('smurf/standardize_estimates.txt', header=None)
             sem_ind = list(estimates[0]).index('SPARCS')
@@ -54,6 +51,7 @@ class smurf_eval_captions:
             mask = np.zeros((len(stand_SPARCS), 3))
             mask[stand_SPARCS <= thres, :] = np.asarray([1, 0, 1])
             mask[stand_SPARCS >= thres, :] = np.asarray([1, 1, 1])
-            metric_scores["SMURF"] = [np.average([stand_SPARCS[i], detail_reward[i], gram_penalty[i]], weights=mask[i, :]) for i in range(0, len(stand_SPARCS))]
+            metric_scores["SMURF"] = [np.average([stand_SPARCS[i], detail_reward[i], gram_penalty[i]],
+                                                 weights=mask[i, :]) for i in range(0, len(stand_SPARCS))]
 
         return metric_scores
