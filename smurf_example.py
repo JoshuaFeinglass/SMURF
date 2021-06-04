@@ -30,4 +30,4 @@ analysis.load_standardized_scores(estimates_file=standardization_file)
 analysis.generate_plot(plot_colors,out_file=plot_file)
 model_penalties = analysis.compute_grammar_penalities()
 for num,total_penalty in enumerate(model_penalties):
-	print('Model %i Penalty: %f'%(num+1,total_penalty))
+    print('Model %i Penalty: %f'%(num+1,total_penalty))
