@@ -34,7 +34,7 @@ def estimate_center(x_all,y_all):
         X = np.concatenate((x_all.reshape(-1, 1), y_all.reshape(-1, 1)), axis=1)
         km = KMeans(n_clusters=1).fit(X)
         closest, _ = pairwise_distances_argmin_min(km.cluster_centers_, X)
-        return (list(x_all).pop(closest[0]),list(y_all).pop(closest[0]))
+        return list(x_all).pop(closest[0]), list(y_all).pop(closest[0]), closest[0]
 
 def get_inter(e1,e2):
     return e1.intersection(e2).area/e2.area
@@ -79,33 +79,33 @@ class smurf_system_analysis():
         fig = plt.figure(0)
         ax = fig.add_subplot(111, aspect='equal')
         self.ellipse = []
-        med_x = []
-        med_y = []
-        med_set = []
+        center_x = []
+        center_y = []
+        estimate_set = []
 
         for i in range(0,self.n_systems):
             x_all = self.stand_SPARCS[i::self.n_systems]
             y_all = self.stand_SPURTS[i::self.n_systems]
-            med_set.append(np.argsort(x_all+y_all)[len(x_all)//2])
+            estimate_x, estimate_y, estimate_index = estimate_center(x_all,y_all)
+            center_x.append(estimate_x)
+            center_y.append(estimate_y)
+            estimate_set.append(estimate_index)
 
         rand_set = []
         for _ in range(0,num_random_pts):
             num_pts = int(len(self.stand_SPARCS)/self.n_systems)
-            rand_set.append(random.choice([i for i in range(0,num_pts) if i not in med_set+rand_set]))
+            rand_set.append(random.choice([i for i in range(0,num_pts) if i not in estimate_set+rand_set]))
+
+        for i in range(0, self.n_systems):
+            x_all = self.stand_SPARCS[i::self.n_systems]
+            y_all = self.stand_SPURTS[i::self.n_systems]
+            x = [x_all[j] for j in rand_set]
+            y = [y_all[j] for j in rand_set]
+            self.ellipse.append(create_elipse(x_all,y_all, ax, colors[i], n_std)[0])
+            ax.scatter(x,y,5,c=colors[i])
 
         for i in range(0,self.n_systems):
-             x_all = self.stand_SPARCS[i::self.n_systems]
-             y_all = self.stand_SPURTS[i::self.n_systems]
-             center = estimate_center(x_all,y_all)
-             med_x.append(center[0])
-             med_y.append(center[1])
-             x = [x_all[j] for j in rand_set]
-             y = [y_all[j] for j in rand_set]
-             self.ellipse.append(create_elipse(x_all,y_all, ax, colors[i], n_std)[0])
-             ax.scatter(x,y,5,c=colors[i])
-
-        for i in range(0,self.n_systems):
-            ax.scatter(med_x[i],med_y[i],s=60,c=colors[i],marker='^',edgecolors='black')
+            ax.scatter(center_x[i],center_y[i],s=60,c=colors[i],marker='^',edgecolors='black')
 
         self.print_ellipse_intersections()
 
