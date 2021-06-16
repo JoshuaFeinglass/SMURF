@@ -1,4 +1,5 @@
-# SeMantic and linguistic UndeRstanding Fusion (SMURF)
+# <img src="/data/smurf_pic.png" width="60"> SeMantic and linguistic UndeRstanding Fusion (SMURF)
+
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-red.svg)](#python) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Automatic caption evaluation metric described in the paper [SMURF: SeMantic and linguistic UndeRstanding Fusion for Caption Evaluation via Typicality Analysis](https://arxiv.org/abs/2106.01444) (ACL 2021).
@@ -37,7 +38,7 @@ If you find this repo useful, please cite:
 @inproceedings{feinglass2021smurf,
   title={SMURF: SeMantic and linguistic UndeRstanding Fusion for Caption Evaluation via Typicality Analysis},
   author={Joshua Feinglass and Yezhou Yang},
-  booktitle={ACL},
+  booktitle={Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics},
   year={2021},
   url={https://arxiv.org/abs/2106.01444}
 }
