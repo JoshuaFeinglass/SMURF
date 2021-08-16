@@ -36,6 +36,8 @@ class smurf_eval_captions:
 
         # Compute SMURF (fusion of estimates)
         if self.fuse:
+            print('computing SMURF score...')
+            t = time.time()
             estimates = pd.read_csv('smurf/standardize_estimates.txt', header=None)
             sem_ind = list(estimates[0]).index('SPARCS')
             qual_ind = list(estimates[0]).index('SPURTS')
@@ -53,5 +55,7 @@ class smurf_eval_captions:
             mask[stand_SPARCS >= thres, :] = np.asarray([1, 1, 1])
             metric_scores["SMURF"] = [np.average([stand_SPARCS[i], detail_reward[i], gram_penalty[i]],
                                                  weights=mask[i, :]) for i in range(0, len(stand_SPARCS))]
+            print("Mean SMURF score: %0.3f. Computed in %0.2f seconds." %
+                    (float(np.mean(metric_scores["SMURF"])),time.time()-t))
 
         return metric_scores

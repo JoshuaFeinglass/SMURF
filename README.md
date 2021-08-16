@@ -2,7 +2,11 @@
 
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-red.svg)](#python) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Automatic caption evaluation metric described in the paper [SMURF: SeMantic and linguistic UndeRstanding Fusion for Caption Evaluation via Typicality Analysis](https://arxiv.org/abs/2106.01444) (ACL 2021).
+Automatic caption evaluation metric described in the paper "SMURF: SeMantic and linguistic UndeRstanding Fusion for Caption Evaluation via Typicality Analysis" (ACL 2021).
+
+arXiv: https://arxiv.org/abs/2106.01444
+
+ACL Anthology: https://aclanthology.org/2021.acl-long.175/
 
 ### Overview
 SMURF is an automatic caption evaluation metric that combines a novel semantic evaluation algorithm (SPARCS) and novel fluency evaluation algorithms (SPURTS and MIMA) for both caption-level and system-level analysis. These evaluations were developed to be generalizable and as a result demonstrate a high correlation with human judgment across many relevant datasets. See paper for more details.
@@ -40,6 +44,6 @@ If you find this repo useful, please cite:
   author={Joshua Feinglass and Yezhou Yang},
   booktitle={Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics},
   year={2021},
-  url={https://arxiv.org/abs/2106.01444}
+  url={https://aclanthology.org/2021.acl-long.175/}
 }
 ```
