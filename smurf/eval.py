@@ -3,7 +3,6 @@ from .eval_algorithms import compute_quality
 import numpy as np
 import pandas as pd
 import time
-from bert_score import score
 
 def preprocess(line):
     return ' '.join([w for w in line.lower().rstrip().replace(' .', '').replace('.', '').split(' ')])

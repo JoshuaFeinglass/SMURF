@@ -12,6 +12,7 @@ ACL Anthology: https://aclanthology.org/2021.acl-long.175/
 SMURF is an automatic caption evaluation metric that combines a novel semantic evaluation algorithm (SPARCS) and novel fluency evaluation algorithms (SPURTS and MIMA) for both caption-level and system-level analysis. These evaluations were developed to be generalizable and as a result demonstrate a high correlation with human judgment across many relevant datasets. See paper for more details.
 
 ### Requirements
+You can run requirements/install.sh to quickly install all the requirements in an Anaconda environment. The requirements are:
 - python 3
 - torch>=1.0.0
 - numpy
@@ -19,6 +20,10 @@ SMURF is an automatic caption evaluation metric that combines a novel semantic e
 - pandas>=1.0.1
 - matplotlib
 - transformers>=3.0.0
+- matplotlib
+- shapely
+- sklearn
+- sentencepiece
 
 ### Usage
 
