@@ -6,4 +6,5 @@ pip install sentencepiece
 pip install shapely
 pip install sklearn
 pip install pandas
+pip install matplotlib
 python3 download_nltk_info.py
