@@ -1,5 +1,5 @@
 #!/bin/bash
-conda install pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch
+conda install pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch -y
 pip install nltk
 pip install transformers
 pip install sentencepiece
