@@ -20,7 +20,6 @@ You can run requirements/install.sh to quickly install all the requirements in a
 - pandas>=1.0.1
 - matplotlib
 - transformers>=3.0.0
-- matplotlib
 - shapely
 - sklearn
 - sentencepiece
