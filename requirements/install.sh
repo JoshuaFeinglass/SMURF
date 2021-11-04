@@ -7,4 +7,5 @@ pip install shapely
 pip install sklearn
 pip install pandas
 pip install matplotlib
-python3 download_nltk_info.py
+DIR="$(cd "$(dirname "$0")" && pwd)"
+python3 $DIR/download_nltk_info.py
